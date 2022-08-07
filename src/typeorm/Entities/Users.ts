@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { userStartingMetrics } from "./UserStartingMetrics";
 
 @Entity()
 export class Users {
@@ -31,4 +32,7 @@ export class Users {
         nullable: false
     })
     lastName: string;
+
+    @OneToMany(() => userStartingMetrics, (startingMetrics) => startingMetrics.user)
+    startingMetrics: userStartingMetrics[];
 }

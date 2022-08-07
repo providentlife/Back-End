@@ -14,11 +14,15 @@ export class UserService {
         return this.usersRepository.find();
     }
 
-    // getUserById(id: number) {
-    //     return this.users.find((user) => user.id === id);
-    // }
+    getUserById(id: number): Promise<Users[]> {
+        return this.usersRepository.find({where: {id : id}})
+    }
 
-    // insertUser(id, email) {
-    //     return this.users.push({id, email});
+    insertUser(body : {username: string, password: string, email: string, firstName: string, lastName: string}) {
+        return this.usersRepository.insert(body);
+    }
+
+    // deleteUserById(id: number) {
+    //     return this.usersRepository.delete({id: id});
     // }
 }

@@ -1,5 +1,6 @@
 import { Users } from "./Entities/Users";
 import { userStartingMetrics } from "./Entities/UserStartingMetrics";
-const entities = [Users, userStartingMetrics];
-export {Users, userStartingMetrics};
+import { WeightEntries } from "./Entities/WeightEntries";
+const entities = [Users, userStartingMetrics, WeightEntries];
+export {Users, userStartingMetrics, WeightEntries};
 export default entities;

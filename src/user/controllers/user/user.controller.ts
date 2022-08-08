@@ -24,8 +24,9 @@ export class UserController {
         return await this.userService.insertUser(body);
     }
     
-    // @Delete(':id')
-    // async deleteUser(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
-    //      await this.userService.deleteUserById(id);
-    // }
+    @Delete(':id')
+    async deleteUser(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+         await this.userService.deleteUserById(id);
+         return res.status(202).json({message: "successfully deleted"});
+    }
 }

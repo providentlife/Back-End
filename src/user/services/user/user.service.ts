@@ -22,7 +22,7 @@ export class UserService {
         return this.usersRepository.insert(body);
     }
 
-    // deleteUserById(id: number) {
-    //     return this.usersRepository.delete({id: id});
-    // }
+    deleteUserById(id: number) {
+        return this.usersRepository.delete({id: id});
+    }
 }

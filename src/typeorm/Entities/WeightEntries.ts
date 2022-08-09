@@ -6,7 +6,7 @@ export class WeightEntries {
     @PrimaryGeneratedColumn()
     id : number;
 
-    @Column()
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     weight_lbs: number;
 
     @CreateDateColumn()

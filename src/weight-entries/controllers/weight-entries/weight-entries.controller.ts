@@ -20,6 +20,7 @@ export class WeightEntriesController {
 
     @Put(':id')
     async updateWeightEntry(@Param('id', ParseIntPipe) id : number, @Res() res: Response, @Body() body) {
-        return await this.weightEntryService.updateWeightEntry(id, body);
+        const updatedEntry = await this.weightEntryService.updateWeightEntry(id, body);
+        return res.status(201).json({message: "successfully updated"});
     }
 }

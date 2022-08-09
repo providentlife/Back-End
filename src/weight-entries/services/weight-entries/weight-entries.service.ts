@@ -11,7 +11,7 @@ export class WeightEntriesService {
     ) {}
 
     getAllEntries(id) {
-        return this.weightEntries.find({where: {id : id}});
+        return this.weightEntries.find({where: {userStartingMetrics : {id: id}}});
     }
 
     insertWeightEntry(body) {

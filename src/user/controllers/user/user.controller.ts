@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Req, Res } from '@nestjs/common';
+import { Body, ConsoleLogger, Controller, Delete, Get, Param, ParseIntPipe, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { check } from 'prettier';
 import { UserService } from 'src/user/services/user/user.service';
 const bcrypt = require('bcrypt');
+const JWTGenerator = require("../../../../util/JWTGenerator.js");
 
 @Controller('user')
 export class UserController {
@@ -21,12 +23,28 @@ export class UserController {
     }
 
     @Post()
-    async createUser(@Body() body) {
+    async createUser(@Body() body, @Res() res: Response) {
         const saltRounds = 10;
         const salt = await bcrypt.genSalt(saltRounds);
         const bcrytPassword = await bcrypt.hash(body.password, salt);
         body.password = bcrytPassword;
-        return await this.userService.insertUser(body);
+        const checkForUser = await this.userService.getUserByEmail(body.email);
+        if (checkForUser.length !== 0) return res.status(500).json({message: "user by this email already exists"});
+        const newUser = await this.userService.insertUser(body);
+        const token = JWTGenerator(newUser.identifiers[0].id);
+        res.status(200).json({token: token});
+    }
+
+    @Post('login')
+    async loginUser(@Body() body, @Res() res: Response) {
+        const userEmail = body.email;
+        const userPassWord = body.password;
+        const checkForUser = await this.userService.getUserByEmail(userEmail);
+        if (checkForUser.length === 0) return res.status(500).json({message: "PASSWORD OR EMAIL IS INCORRECT"});
+        const validPassword = await bcrypt.compare(userPassWord, checkForUser[0].password);
+        if (!validPassword) return res.status(500).json({message: "PASSWORD OR EMAIL IS INCORRECT"});
+        const token = JWTGenerator(checkForUser[0].id);
+        res.status(200).json({token: token});
     }
     
     @Delete(':id')

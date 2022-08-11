@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { UserService } from 'src/user/services/user/user.service';
+const bcrypt = require('bcrypt');
 
 @Controller('user')
 export class UserController {
@@ -21,6 +22,10 @@ export class UserController {
 
     @Post()
     async createUser(@Body() body) {
+        const saltRounds = 10;
+        const salt = await bcrypt.genSalt(saltRounds);
+        const bcrytPassword = await bcrypt.hash(body.password, salt);
+        body.password = bcrytPassword;
         return await this.userService.insertUser(body);
     }
     

@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { UserStartingMetricsService } from 'src/user-starting-metrics/services/user-starting-metrics/user-starting-metrics.service';
-const authorization = require('../../../middleware/authorization.js');
 
 @Controller('user-starting-metrics')
 export class UserStartingMetricsController {

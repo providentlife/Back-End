@@ -1,5 +1,5 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Req, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { UserStartingMetricsService } from 'src/user-starting-metrics/services/user-starting-metrics/user-starting-metrics.service';
 
 @Controller('user-starting-metrics')

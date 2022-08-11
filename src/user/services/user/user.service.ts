@@ -7,22 +7,30 @@ import { Users } from 'src/typeorm';
 export class UserService {
     constructor(
         @InjectRepository(Users)
-        private usersRepository : Repository<Users>
-    ) {}
+        private usersRepository: Repository<Users>
+    ) { }
 
     getAllUsers(): Promise<Users[]> {
         return this.usersRepository.find();
     }
 
     getUserById(id: number): Promise<Users[]> {
-        return this.usersRepository.find({where: {id : id}})
+        return this.usersRepository.find({ where: { id: id } })
     }
 
-    insertUser(body : {username: string, password: string, email: string, firstName: string, lastName: string}) {
+    getUserByEmail(email: string): Promise<Users[]> {
+        return this.usersRepository.find({
+            where: {
+                email: email
+            }
+        })
+    }
+
+    insertUser(body: { username: string, password: string, email: string, firstName: string, lastName: string }) {
         return this.usersRepository.insert(body);
     }
 
     deleteUserById(id: number) {
-        return this.usersRepository.delete({id: id});
+        return this.usersRepository.delete({ id: id });
     }
 }

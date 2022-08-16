@@ -9,11 +9,6 @@ export class Users {
     @Column({
         nullable: false
     })
-    username: string;
-
-    @Column({
-        nullable: false
-    })
     password: string;
 
     @Column({

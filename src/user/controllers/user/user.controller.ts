@@ -44,7 +44,7 @@ export class UserController {
         const validPassword = await bcrypt.compare(userPassWord, checkForUser[0].password);
         if (!validPassword) return res.status(500).json({message: "PASSWORD OR EMAIL IS INCORRECT"});
         const token = JWTGenerator(checkForUser[0].id);
-        res.status(200).json({token: token});
+        res.status(200).json({user: checkForUser[0], token: token});
     }
     
     @Delete(':id')

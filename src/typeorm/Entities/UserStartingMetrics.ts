@@ -13,6 +13,9 @@ export class userStartingMetrics {
     @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     weight: number;
 
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
+    height: number;
+
     @Column()
     gender: string;
 

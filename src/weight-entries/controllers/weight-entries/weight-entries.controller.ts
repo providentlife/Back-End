@@ -9,8 +9,8 @@ export class WeightEntriesController {
     @Get(':id')
     async getAllWeightEntriesFromOneSession(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
         const allWeightEntries = await this.weightEntryService.getAllEntries(id);
-        if (allWeightEntries.length !== 0) res.status(200).json(allWeightEntries);
-        else res.status(404).json({message: "No weight entries"});
+        if (allWeightEntries.length !== 0) return res.status(200).json(allWeightEntries);
+        else return res.status(204).json({allWeightEntries, message: "No weight entries"});
     }
 
     @Post()

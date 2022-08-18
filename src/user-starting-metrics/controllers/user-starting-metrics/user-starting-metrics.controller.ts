@@ -17,7 +17,7 @@ export class UserStartingMetricsController {
     async getUserMetrics(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
         const singleMetric = await this.userStartingMetricsService.getSingleUserMetrics(id);
         if (singleMetric.length !== 0) res.status(200).json(singleMetric);
-        else res.status(404).json({message: "metric by this id is not found"});
+        else res.status(404).json({singleMetric, message: "metric by this id is not found"});
     }
 
     @Post()

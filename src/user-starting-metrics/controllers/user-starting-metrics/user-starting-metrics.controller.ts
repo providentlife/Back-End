@@ -10,14 +10,14 @@ export class UserStartingMetricsController {
     async getAllMetrics(@Res() res: Response) {
         const allMetrics = await this.userStartingMetricsService.getUserMetrics();
         if (allMetrics.length !== 0) res.status(200).json(allMetrics);
-        else res.status(204).json({message: 'No current metrics'});
+        else res.status(202).json({message: 'No current metrics'});
     }
 
     @Get(':id')
     async getUserMetrics(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
         const singleMetric = await this.userStartingMetricsService.getSingleUserMetrics(id);
         if (singleMetric.length !== 0) res.status(200).json(singleMetric);
-        else res.status(204).json({singleMetric, message: "metric by this id is not found"});
+        else res.status(202).json({singleMetric, message: "metric by this id is not found"});
     }
 
     @Post()

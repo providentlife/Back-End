@@ -14,7 +14,7 @@ import entities from './typeorm';
     password: "password",
     database: 'project_health',
     entities,
-    synchronize: true,
+    synchronize: false,
   })],
   controllers: [],
   providers: [],

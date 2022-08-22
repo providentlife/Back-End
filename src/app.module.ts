@@ -8,13 +8,17 @@ import entities from './typeorm';
 @Module({
   imports: [UserModule, UserStartingMetricsModule, WeightEntriesModule, TypeOrmModule.forRoot({
     type: "postgres",
-    host: 'localhost',
-    port: 5432,
-    username: "postgres",
-    password: "password",
-    database: 'project_health',
+    url: process.env.DATABASE_URL,
+    // host: 'localhost',
+    // port: 5432,
+    // username: "postgres",
+    // password: "password",
+    // database: 'project_health',
     entities,
     synchronize: false,
+    ssl: {
+      rejectUnauthorized: false
+    }
   })],
   controllers: [],
   providers: [],

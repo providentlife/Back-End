@@ -15,7 +15,7 @@ import entities from './typeorm';
     // password: "password",
     // database: 'project_health',
     entities,
-    synchronize: false,
+    synchronize: true,
     ssl: {
       rejectUnauthorized: false
     }

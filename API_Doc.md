@@ -1,8 +1,8 @@
 # Project Health
 ## User
 ###  `GET` `/`
-- `/user` Gets all users.
-- `/user/:id` Gets single user by id.
+- `/user` Gets all users from database.
+- `/user/:id` Gets single user by id from database.
 ###  `POST` `/`
 - `/user` Posts a user into database for user sign up.
 - `/user/login` Posts user credentials to authenticate and return JWT token if successful.

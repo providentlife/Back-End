@@ -1,7 +1,4 @@
 # Project Health
-###  `GET` `/`
-- Responds with status code 200 and object `{ "message" : "Successful Connection" }`
-
 ## User
 ###  `GET` `/`
 - `/user` Gets all users.

@@ -2,49 +2,29 @@
 ###  `GET` `/`
 - Responds with status code 200 and object `{ "message" : "Successful Connection" }`
 
-## Chart
+## User
 ###  `GET` `/`
-- 
-- 
+- `/user` Gets all users.
+- `/user/:id` Gets single user by id.
 ###  `POST` `/`
-- 
-- 
-###  `PUT` `/`
-- 
-- 
+- `/user` Posts a user into database for user sign up.
+- `/user/login` Posts user credentials to authenticate and return JWT token if successful.
 ###  `DELETE` `/`
-- 
-- 
+- `/user/:id` Deletes a user by id from database.
 
-## Sessions
+## User Starting Metrics
 ###  `GET` `/`
-- 
-- 
+- `/user-starting-metrics` Gets all user starting metrics from database.
+- `/user-starting-metrics/:id` Gets all user starting metrics by id from database.
 ###  `POST` `/`
-- 
-- 
+- `/user-starting-metrics` Posts user starting metric into database.
 ###  `DELETE` `/`
-- 
-- 
+- `/user-starting-metrics:id` Deletes a user starting metrics by id from database.
 
-## User Info
+## Weight Entries
 ###  `GET` `/`
-- 
-- 
+- `/weight-entries/:id` Gets all weight entries by user starting metrics id from database.
 ###  `POST` `/`
-- 
-- 
+- `/weight-entries` Posts user weight entries into database.
 ###  `PUT` `/`
-- 
-- 
-
-## User Metrics
-###  `GET` `/`
-- 
-- 
-###  `POST` `/`
-- 
-- 
-###  `PUT` `/`
-- 
-- 
+- `/weight-entries/:id` Updates single user weight entry by id from database.

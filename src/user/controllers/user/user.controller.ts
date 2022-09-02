@@ -8,18 +8,24 @@ const JWTGenerator = require("../../../../util/JWTGenerator.js");
 @Controller('user')
 export class UserController {
     constructor(private userService: UserService) {}
+
+    @Get('prefetch')
+    async prefetchHello(@Res() res: Response) {
+        return res.status(200).json({message: "Hello"});
+    }
+
     @Get()
     async getUsers(@Res() res: Response) {
         const allUsers = await this.userService.getAllUsers();
-        if (allUsers.length !== 0) res.status(200).json(allUsers);
-        else res.status(202).json({message: "There are no users"});
+        if (allUsers.length !== 0) return res.status(200).json(allUsers);
+        else return res.status(202).json({message: "There are no users"});
     }
 
     @Get(':id')
     async getSingleUser(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
         const selectedUser = await this.userService.getUserById(id);
-        if (selectedUser.length !== 0) res.json(selectedUser);
-        else res.status(202).json({message: 'User not found'});
+        if (selectedUser.length !== 0) return res.json(selectedUser);
+        else return res.status(202).json({message: 'User not found'});
     }
 
     @Post()
@@ -32,7 +38,7 @@ export class UserController {
         if (checkForUser.length !== 0) return res.status(500).json({message: "user by this email already exists"});
         const newUser = await this.userService.insertUser(body);
         const token = JWTGenerator(newUser.identifiers[0].id);
-        res.status(200).json({token: token});
+        return res.status(200).json({token: token});
     }
 
     @Post('login')
@@ -44,7 +50,7 @@ export class UserController {
         const validPassword = await bcrypt.compare(userPassWord, checkForUser[0].password);
         if (!validPassword) return res.status(500).json({message: "PASSWORD OR EMAIL IS INCORRECT"});
         const token = JWTGenerator(checkForUser[0].id);
-        res.status(200).json({user: checkForUser[0], token: token});
+        return res.status(200).json({user: checkForUser[0], token: token});
     }
     
     @Delete(':id')

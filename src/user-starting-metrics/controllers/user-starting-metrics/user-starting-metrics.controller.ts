@@ -9,15 +9,15 @@ export class UserStartingMetricsController {
     @Get()
     async getAllMetrics(@Res() res: Response) {
         const allMetrics = await this.userStartingMetricsService.getUserMetrics();
-        if (allMetrics.length !== 0) res.status(200).json(allMetrics);
-        else res.status(202).json({message: 'No current metrics'});
+        if (allMetrics.length !== 0) return res.status(200).json(allMetrics);
+        else return res.status(202).json({message: 'No current metrics'});
     }
 
     @Get(':id')
     async getUserMetrics(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
         const singleMetric = await this.userStartingMetricsService.getSingleUserMetrics(id);
-        if (singleMetric.length !== 0) res.status(200).json(singleMetric);
-        else res.status(202).json({singleMetric, message: "metric by this id is not found"});
+        if (singleMetric.length !== 0) return res.status(200).json(singleMetric);
+        else return res.status(202).json({singleMetric, message: "metric by this id is not found"});
     }
 
     @Post()
